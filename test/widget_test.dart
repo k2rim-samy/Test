@@ -8,7 +8,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
 
     await tester.pumpWidget(const NotesApp());
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(find.text('ملاحظاتي'), findsOneWidget);
     expect(find.text('ملاحظة جديدة'), findsOneWidget);
