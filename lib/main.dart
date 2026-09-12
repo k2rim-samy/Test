@@ -343,10 +343,10 @@ class _NotesHomePageState extends State<NotesHomePage> {
 
                             if (pickedDate == null) return;
 
-                            if (!mounted) return;
+                            if (!context.mounted) return;
 
                             final pickedTime = await showTimePicker(
-                              context: dialogContext,
+                              context: context,
                               initialTime: TimeOfDay.fromDateTime(
                                 reminderDateTime ?? DateTime.now(),
                               ),
