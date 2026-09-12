@@ -796,12 +796,68 @@ class _NotesHomePageState extends State<NotesHomePage> {
               const SizedBox(height: 18),
               Expanded(
                 child: _filteredNotes.isEmpty
-                    ? Center(
-                        child: Text(
-                          _strings.noResults,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black54,
+                    ? SingleChildScrollView(
+                        child: Center(
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(28),
+                            margin: const EdgeInsets.symmetric(horizontal: 6),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(28),
+                              border: Border.all(
+                                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.18),
+                                width: 1.1,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.04),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 8),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 76,
+                                  height: 76,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
+                                    borderRadius: BorderRadius.circular(22),
+                                  ),
+                                  child: Icon(
+                                    Icons.note_add_rounded,
+                                    size: 34,
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Text(
+                                  _strings.emptyStateTitle,
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  _strings.emptyStateBody,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                                  ),
+                                ),
+                                const SizedBox(height: 18),
+                                FilledButton.icon(
+                                  onPressed: () => _showNoteDialog(),
+                                  icon: const Icon(Icons.add_rounded),
+                                  label: Text(_strings.emptyStateAction),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       )
@@ -1302,6 +1358,9 @@ class AppStrings {
     required this.favoriteCount,
     required this.pinnedCount,
     required this.noResults,
+    required this.emptyStateTitle,
+    required this.emptyStateBody,
+    required this.emptyStateAction,
     required this.filterAll,
     required this.filterPinned,
     required this.filterFavorites,
@@ -1347,6 +1406,9 @@ class AppStrings {
   final String favoriteCount;
   final String pinnedCount;
   final String noResults;
+  final String emptyStateTitle;
+  final String emptyStateBody;
+  final String emptyStateAction;
   final String filterAll;
   final String filterPinned;
   final String filterFavorites;
@@ -1394,6 +1456,9 @@ class AppStrings {
         favoriteCount: 'Favorites',
         pinnedCount: 'Pinned',
         noResults: 'No notes match your search',
+        emptyStateTitle: 'Nothing here yet',
+        emptyStateBody: 'Create your first note to start organizing ideas, tasks, and reminders.',
+        emptyStateAction: 'Add your first note',
         filterAll: 'All',
         filterPinned: 'Pinned',
         filterFavorites: 'Favorites',
@@ -1441,6 +1506,9 @@ class AppStrings {
       favoriteCount: 'المفضلة',
       pinnedCount: 'المثبتة',
       noResults: 'لا توجد ملاحظات مطابقة لبحثك',
+      emptyStateTitle: 'لا توجد ملاحظات بعد',
+      emptyStateBody: 'أنشئ أول ملاحظة لتبدأ في تنظيم أفكارك ومهامك وتذكيراتك.',
+      emptyStateAction: 'إضافة أول ملاحظة',
       filterAll: 'الكل',
       filterPinned: 'المثبتة',
       filterFavorites: 'المفضلة',
